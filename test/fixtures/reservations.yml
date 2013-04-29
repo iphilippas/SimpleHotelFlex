@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reference: MyString
+  room_id: 1
+  fromdate: 2013-04-29
+  todate: 2013-04-29
+  customer_id: 1
+  deposit: 9.99
+  description: MyText
+
+two:
+  reference: MyString
+  room_id: 1
+  fromdate: 2013-04-29
+  todate: 2013-04-29
+  customer_id: 1
+  deposit: 9.99
+  description: MyText

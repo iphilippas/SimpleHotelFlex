@@ -1,0 +1,66 @@
+<%- model_class = RoomRate -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human(count:2) %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:duration) %></th>
+      <th><%= model_class.human_attribute_name(:days) %></th>
+      <th><%= model_class.human_attribute_name(:rate) %></th>
+      <th><%= model_class.human_attribute_name(:room_type_id) %></th>
+      
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @room_rates.each do |room_rate| %>
+      <tr>
+        <td><%= link_to room_rate.id, room_rate_path(room_rate) %></td>
+        <td><%= room_rate.duration %></td>
+        <td><%= room_rate.days %></td>
+        <td><%= room_rate.rate %></td>
+        <td><%= room_rate.room_type.name %></td>
+        
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_room_rate_path(room_rate), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      room_rate_path(room_rate),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_room_rate_path,
+            :class => 'btn btn-primary' %>
+
+
+<%= will_paginate @rooms %>
+
+
+<%= content_for :sidebar do %>
+	<%= search_form_for @q, :html => { class: 'well' } do |f| %>	
+		
+		<div class="control-group">
+			<%= f.label :room_type_name_cont, class: 'control-label' %> 
+			<div class="controls">
+				<%= f.text_field :room_type_name_cont %>
+			</div>
+		</div>
+		<div class="form-actions">
+			<%= f.submit "Εύρεση", class: 'btn btn-primary' %>
+			<%= link_to "Καθαρισμός", room_rates_path, class: "btn" %>
+		</div>
+		
+		
+	<%end%>
+<%end%>
+
+
