@@ -7,7 +7,7 @@ textarea{
 }
 
 #customer_modal_table tbody tr:hover{
-	//background-color: #666 !important;
+	background-color: #666 !important;
 	color: #fff;
 	cursor: pointer;
 		td{

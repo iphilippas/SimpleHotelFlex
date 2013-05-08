@@ -15,8 +15,8 @@
   <tbody>
     <% @customers.each do |customer| %>
       <tr>
-        <td class="cid" id="ci_<%= customer.id %>"><%= customer.id %></td>
-        <td class="cname" id="cn_<%= customer.id %>"><%= customer.name %></td>
+        <td id="ci_<%= customer.id %>"><%= customer.id %></td>
+        <td id="cn_<%= customer.id %>"><%= customer.name %></td>
         <td><%= customer.email %></td>
         <td><%= customer.phone %></td>
         <td><%= customer.address %></td>
@@ -30,8 +30,7 @@
 <script>
 $('#customer_modal_table tr').click(function() {
   $('#customer_modal').modal("hide");
-  name = 
-	$('#reservation_customer_name').val(name);  
+	$('#reservation_customer_name').val("44");  
 });
 </script>
 

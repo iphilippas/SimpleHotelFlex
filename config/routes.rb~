@@ -1,0 +1,27 @@
+Simplehotelflex::Application.routes.draw do
+  resources :reservations
+
+
+  resources :room_rates
+
+
+  resources :rooms do
+    get "rooms/room_managment"
+    get "available_rooms/"
+  end
+
+
+  resources :room_types
+
+
+  resources :customers
+
+
+  devise_for :users
+
+  get "dashboard/index"
+  
+  root :to => 'dashboard#index'
+
+  
+end

@@ -17,7 +17,9 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.el
 
-
+$('#customer_modal').on('hidden', function(){
+    $(this).data('modal', null);
+});
 
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);

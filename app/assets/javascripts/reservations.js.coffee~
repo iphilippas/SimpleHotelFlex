@@ -6,4 +6,5 @@ jQuery ->
     $('#customer_modal').modal
       show: true
       remote: "/customers/reservation_modal?name=" + $('#reservation_customer_name').val()
-    
+  $('#customer_modal table').on 'click', ->
+    alert "44"

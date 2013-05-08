@@ -9,7 +9,7 @@
   		<div class="input-append">
   			<input id="reservation_customer_id" class="string optional" type="hidden" name="reservation[customer_id]">
 				<input id="reservation_customer_name" class="string optional" type="text" size="50" name="reservation[customer_name]">
-  			<button id="find_cust" class="btn"  type="button" >Εύρεση!</button>
+  			<button id="find_cust" class="btn" data-toggle="modal" type="button" >Εύρεση!</button>
   		</div>
 	</div>
   </div>
