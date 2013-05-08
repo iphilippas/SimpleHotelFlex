@@ -13,7 +13,9 @@ Simplehotelflex::Application.routes.draw do
   resources :room_types
 
 
-  resources :customers
+  resources :customers do
+    get :reservation_modal, on: :collection
+  end
 
 
   devise_for :users

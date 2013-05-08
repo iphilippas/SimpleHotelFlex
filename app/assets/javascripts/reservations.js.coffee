@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+jQuery ->
+  $('#find_cust').click ->
+    $('#customer_modal').modal
+      show: true
+      remote: "/customers/reservation_modal?name=" + $('#reservation_customer_name').val() 

@@ -77,8 +77,18 @@ class CustomersController < ApplicationController
     @customer.destroy
 
     respond_to do |format|
-      format.html { redirect_to customers_url }
+      format.html 
       format.json { head :no_content }
+    end
+  end
+  
+  #Reservation Modal
+  def reservation_modal
+    name = "%#{params[:name]}%"
+    @customers = Customer.where("name LIKE ?", name)
+    respond_to do |format|
+      format.html { render layout: false }
+      format.json { render json: @customers }
     end
   end
 end
