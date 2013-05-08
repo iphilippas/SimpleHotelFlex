@@ -1,5 +1,5 @@
 <%- model_class = Customer -%>
-
+<%= form_for @customer, html: {id: "new_customer_modal"}, remote: true do |f|%>
 <table class="table table-striped" id="customer_modal_table">
   <thead>
     <tr>
@@ -24,14 +24,28 @@
        
       </tr>
     <% end %>
+		
   </tbody>
+  <tfoot>
+	<tr id="add_customer">
+			<td><%= f.submit "+", class:"btn btn-primary" %></td>
+	      <td><%= f.text_field :name %></td>
+	      <td><%= f.text_field :email %></td>
+	      <td><%= f.text_field :phone %></td>
+	      <td><%= f.text_field :address %></td>
+		
+	</tr>
+	</tfoot>
 </table>
-
+<% end %>
 <script>
-$('#customer_modal_table tr').click(function() {
+$('#customer_modal_table tbody tr').click(function() {
   $('#customer_modal').modal("hide");
-  name = 
-	$('#reservation_customer_name').val(name);  
+  name = $(this).find('td.cname').text()
+  id = $(this).find('td.cid').text()
+ 
+  $('#reservation_customer_name').val(name);
+  $('#reservation_customer_id').val(id); 
 });
 </script>
 

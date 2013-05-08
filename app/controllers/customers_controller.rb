@@ -47,9 +47,11 @@ class CustomersController < ApplicationController
       if @customer.save
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
         format.json { render json: @customer, status: :created, location: @customer }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @customer.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -86,6 +88,7 @@ class CustomersController < ApplicationController
   def reservation_modal
     name = "%#{params[:name]}%"
     @customers = Customer.where("name LIKE ?", name)
+    @customer = Customer.new
     respond_to do |format|
       format.html { render layout: false }
       format.json { render json: @customers }

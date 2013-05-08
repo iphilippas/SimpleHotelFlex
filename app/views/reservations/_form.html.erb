@@ -1,9 +1,11 @@
 <%= simple_form_for @reservation, :html => { :class => 'form-horizontal' } do |f| %>
-  
-  <%= f.association :room %>
-  <%= f.input :fromdate, as: :string %>
-  <%= f.input :todate, as: :string %>
-  <div class="control-group string optional reservation_todate">
+  <div class="well">
+	<h5>Ημερομηνίες</h5>  
+  	<%= f.input :fromdate, as: :string %>
+  	<%= f.input :todate, as: :string %>
+  </div>
+
+  <div class="control-group string optional reservation_customer">
 	<label class="string optional control-label" for="reservation_customer_id">Πελάτης</label>
 	<div class="controls">
   		<div class="input-append">
@@ -13,6 +15,15 @@
   		</div>
 	</div>
   </div>
+  
+  <div class="control-group string optional reservation_room">
+	<label class="string optional control-label" for="reservation_rooms">Δωμάτια</label>
+	<div class="controls">
+  		<div class="input-append">
+  			<button id="find_cust" class="btn" id="add_rooms"  type="button" >Προσθήκη</button>
+  		</div>
+	</div>
+  </div>	
 	
   <%= f.input :deposit, input_html: { class:"input-mini" } %>
   <%= f.input :description %>
