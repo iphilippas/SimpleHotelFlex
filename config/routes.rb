@@ -7,6 +7,7 @@ Simplehotelflex::Application.routes.draw do
 
   resources :rooms do
     get "rooms/room_managment"
+    get :available_rooms, on: :collection
   end
 
 

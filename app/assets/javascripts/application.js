@@ -31,6 +31,7 @@ var checkin = $('#reservation_fromdate').datepicker({
       newDate.setDate(newDate.getDate() + 1);
       checkout.setStartDate(newDate);
    }
+   //$('#reservation_todate').removeAttr("disabled");
    checkin.hide();
    $('#reservation_todate')[0].focus();
    }).data('datepicker');
@@ -39,5 +40,6 @@ var checkout = $('#reservation_todate').datepicker({
    format: "dd/mm/yyyy",
    startDate: now
 }).on('changeDate', function(ev) {
+   //$('#select_rooms').removeAttr("disabled");
    checkout.hide();
 }).data('datepicker');

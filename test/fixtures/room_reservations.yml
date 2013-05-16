@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  room_id: 1
+  reservation_id: 1
+  rate: MyText
+
+two:
+  room_id: 1
+  reservation_id: 1
+  rate: MyText

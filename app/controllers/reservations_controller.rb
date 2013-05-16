@@ -24,6 +24,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   # GET /reservations/new.json
   def new
+    @rooms = Room.all.group_by{|t| t.room_type.name}
     @reservation = Reservation.new
 
     respond_to do |format|
@@ -35,13 +36,14 @@ class ReservationsController < ApplicationController
   # GET /reservations/1/edit
   def edit
     @reservation = Reservation.find(params[:id])
+    @rooms = Room.all.group_by{|t| t.room_type.name}
   end
 
   # POST /reservations
   # POST /reservations.json
   def create
     @reservation = Reservation.new(params[:reservation])
-
+    #@reservation.attributes = {'room_ids' => []}.merge(params[:reservation] || {})
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
@@ -57,7 +59,8 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1.json
   def update
     @reservation = Reservation.find(params[:id])
-
+    @rooms = Room.all.group_by{|t| t.room_type.name}
+    @reservation.attributes = {'room_ids' => []}.merge(params[:reservation] || {})
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
@@ -80,4 +83,5 @@ class ReservationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

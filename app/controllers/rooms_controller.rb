@@ -42,7 +42,7 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = Room.new(params[:room])
-
+    
     respond_to do |format|
       if @room.save
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
@@ -80,6 +80,16 @@ class RoomsController < ApplicationController
       format.html { redirect_to rooms_url }
       format.json { head :no_content }
     end
+  end
+  
+  #Reservation 
+  def available_rooms
+    fromdate = Date.parse(params[:fromdate])
+    todate = Date.parse(params[:todate])
+    @rooms =  Room.joins(:reservations).where("(fromdate <= ? AND todate >= ?) OR (fromdate <= ? AND todate >= ?)", fromdate, fromdate, todate, todate)
+    
+    render json: @rooms 
+   
   end
   
   #room_managment
