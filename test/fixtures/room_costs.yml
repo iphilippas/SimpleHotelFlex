@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  room_id: 1
+  reservation_id: 1
+  day: 2013-05-18
+  cost: 9.99
+
+two:
+  room_id: 1
+  reservation_id: 1
+  day: 2013-05-18
+  cost: 9.99

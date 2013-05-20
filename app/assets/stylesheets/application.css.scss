@@ -1,6 +1,28 @@
 @import "bourbon";
 @import "bootstrap_and_overrides";
 @import "bootstrap-datepicker";
+@import "rooms";
+
+.clear{
+        zoom: 1;
+}
+
+.clear:after{
+        content: ".";
+        display: block;
+        height: 0;
+        font_size: 0;
+        clear: both;
+        visibility: hidden;
+}
+
+.inline-sub{
+        margin-top: -7px;
+}
+
+.imp{
+        font-weight:bold
+}
 
 body .modal{
     /* new custom width */
@@ -20,4 +42,14 @@ textarea{
 		td{
 			background-color: #666 !important;
 		}
+}
+
+#room_costs_form{
+	label{
+		text-align: left;
+		width: 130px;
+	}
+	.controls{
+		margin-left: 100px;
+	}
 }

@@ -1,0 +1,33 @@
+<h3>Δωμάτια</h3>
+<% @room_types.each do |room_type| %>
+<div class="well">
+<h5><%= room_type.name %></h5>
+	<% room_type.rooms.each do |room| %>
+		<div class="room-element rounded span2 <%= room_class(room) %>">
+			<h5>
+				<% if room.status == true %>
+					<%= link_to room.name,  root_path %>
+				<% else %>
+					<%= room.name %>
+				<% end %>
+			</h5>
+			<div class="room-element-body">
+				<% if room.status %>
+					<%= link_to t('.destroy', :default => t('Checkout')),
+		                       root_path,
+		                       :data => { :confirm => t('.confirm', :default => t('Checkout', :default => 'Are you sure?')) },
+		                       :class => 'btn btn-mini btn-danger' %>
+				<% else %>
+					<%= link_to t('.new', :default => t("Checkin")),
+					            new_reservation_path( room_id: room.id),
+					            :class => 'btn btn-mini btn-primary' %>
+				<% end %>
+			</div>
+		</div>
+		
+	<% end %>
+	<div class="clear"></div>
+</div>
+<div class="divider"></div>
+
+<% end %>

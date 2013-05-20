@@ -1,5 +1,10 @@
 Simplehotelflex::Application.routes.draw do
-  resources :reservations
+  resources :room_costs
+
+
+  resources :reservations do
+    get :room_costs, on: :collection
+  end
 
 
   resources :room_rates
@@ -8,6 +13,7 @@ Simplehotelflex::Application.routes.draw do
   resources :rooms do
     get "rooms/room_managment"
     get :available_rooms, on: :collection
+    get :list_rooms, on: :collection, as: :listrooms
   end
 
 

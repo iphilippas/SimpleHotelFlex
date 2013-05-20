@@ -14,7 +14,7 @@ gem 'simple_form'
 gem 'bootstrap-will_paginate'
 gem "ransack"
 gem 'bootstrap-datepicker-rails'
-
+gem "nested_form"
 
 # Gems used only for assets and not required
 # in production environments by default.

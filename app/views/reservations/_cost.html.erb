@@ -1,0 +1,16 @@
+<%= f.fields_for :room_costs, :wrapper => false, html: { class: "form-horizontal", id: "room_costs_form"} do |room_cost| %>
+    <% @rooms.each do |room| %>
+	<h5>Δωμάτιο <%= room.name %></h5>
+		<% for day in @fromdate..@todate %>
+			
+					 <div class="control-group">
+						<label class="control-label"><%= day %>: </label>
+					 <div class="controls">
+					 	<%= room_cost.text_field :rate, value: daily_cost(room, @duration, I18n.l(day, :format => "%A")), class:"input-mini" %>
+					 </div>
+					</div>
+				
+		<% end %>
+	<% end %>
+  <% end %>
+

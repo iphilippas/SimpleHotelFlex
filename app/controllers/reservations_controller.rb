@@ -83,5 +83,13 @@ class ReservationsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+  def room_costs
+    @rooms = Room.find(params[:rooms])
+    @fromdate = Date.parse(params[:fromdate])
+    @todate = Date.parse(params[:todate])
+    @duration = (@todate - @fromdate).to_i + 1
+    if (@duration >= 3)
+      @duration = 3
+    end
+  end
 end

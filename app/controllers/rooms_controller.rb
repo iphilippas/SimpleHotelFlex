@@ -92,8 +92,13 @@ class RoomsController < ApplicationController
    
   end
   
-  #room_managment
-  def room_managment
-    
+  #Rooms Dashboard
+  def list_rooms
+    @room_types = RoomType.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @rooms }
+    end
   end
 end

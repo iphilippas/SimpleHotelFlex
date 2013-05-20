@@ -2,12 +2,13 @@
 
 class Reservation < ActiveRecord::Base
   has_many :room_reservations
+  has_many :room_costs
   has_many :rooms, through: :room_reservations
   belongs_to :customer
   
   accepts_nested_attributes_for :room_reservations
   accepts_nested_attributes_for :rooms
-  
+
   attr_accessible :customer_id, :deposit, :description, :fromdate, :reference, :todate, :customer_name, :room_ids, :customer_name
   attr_accessor :customer_name
   

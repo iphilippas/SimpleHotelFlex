@@ -20,4 +20,4 @@ jQuery ->
             id = "room_" + @id
             $("#" + id).attr "disabled", true
           $("#room_modal input[type=checkbox]:checked").each ->
-            $(this).removeAttr "disabled"     
+            $(this).removeAttr "disabled"

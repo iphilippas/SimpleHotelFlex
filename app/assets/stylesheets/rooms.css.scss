@@ -1,3 +1,11 @@
-// Place all the styles related to the Rooms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.room-element{
+	@include border-top-radius(6px);
+	@include border-bottom-radius(6px);
+	@include border-left-radius(6px);
+	@include border-right-radius(6px);
+	margin-bottom: 20px;
+	text-align: center;
+	.room-element-body{
+		padding: 10px;
+	}
+}

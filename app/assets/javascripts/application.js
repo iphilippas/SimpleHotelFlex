@@ -16,7 +16,7 @@
 //= require_tree .
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.el
-
+//= require jquery_nested_form
 
 
 var nowTemp = new Date();

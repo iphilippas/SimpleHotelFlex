@@ -1,4 +1,4 @@
-<%= simple_form_for @reservation, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_nested_form_for @reservation, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="well">
 	<h5>Ημερομηνίες</h5>  
   	<%= f.input :fromdate, as: :string %>
@@ -23,7 +23,7 @@
 											<% roomtype[1].each do |room| %>
 												<label class="checkbox">
 													<% if @reservation %>
-														<%= check_box_tag "room_#{room.id}", room.id, @reservation.rooms.include?(room), name: 'reservation[room_ids][]' %>
+														<%= check_box_tag "room_#{room.id}", room.id, @reservation.rooms.include?(room), name: 'reservation[room_ids][]', class: 'room_checkbox' %>
 													<% else %>
 														<%= check_box_tag "room_#{room.id}", room.id, nil, name: 'reservation[room_ids][]' %>
 													<% end %>
@@ -55,6 +55,8 @@
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 reservations_path, :class => 'btn' %>
   </div>
+
+
 <% end %>
 
 <!-- Customer Modal -->
@@ -69,10 +71,4 @@
 </div>
 
 
-<%= content_for :sidebar do %>
-	<div class="well">
-		<h5>Τιμές</h5><hr>
-		<div class="rates">
-		</div>
-	</div>
-<%end%>
+
