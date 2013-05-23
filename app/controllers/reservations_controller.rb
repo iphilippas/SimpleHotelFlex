@@ -42,6 +42,7 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
+    @rooms = Room.all.group_by{|t| t.room_type.name}
     @reservation = Reservation.new(params[:reservation])
     #@reservation.attributes = {'room_ids' => []}.merge(params[:reservation] || {})
     respond_to do |format|

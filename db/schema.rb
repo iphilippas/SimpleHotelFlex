@@ -37,12 +37,11 @@ ActiveRecord::Schema.define(:version => 20130518090534) do
   end
 
   create_table "room_costs", :force => true do |t|
-    t.integer  "room_id"
-    t.integer  "reservation_id"
+    t.integer  "reservation_room_id"
     t.date     "day"
     t.decimal  "cost"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "room_rates", :force => true do |t|
@@ -71,11 +70,10 @@ ActiveRecord::Schema.define(:version => 20130518090534) do
 
   create_table "rooms", :force => true do |t|
     t.string   "name"
-    t.string   "status"
     t.integer  "room_type_id"
     t.text     "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

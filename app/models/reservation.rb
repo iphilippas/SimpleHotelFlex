@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
 class Reservation < ActiveRecord::Base
-  has_many :room_reservations
-  has_many :room_costs
+  has_many :room_reservations, dependent: :destroy
+  has_many :room_costs, through: :room_reservations
   has_many :rooms, through: :room_reservations
   belongs_to :customer
   
@@ -11,6 +11,7 @@ class Reservation < ActiveRecord::Base
 
   attr_accessible :customer_id, :deposit, :description, :fromdate, :reference, :todate, :customer_name, :room_ids, :customer_name
   attr_accessor :customer_name
+  
   
   validates :customer_id, :fromdate, :todate, presence: true
   validates :rooms, presence: true
@@ -38,4 +39,5 @@ class Reservation < ActiveRecord::Base
     end
   end
   
+
 end
