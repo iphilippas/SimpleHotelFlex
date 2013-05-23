@@ -1,18 +1,23 @@
-<%= simple_form_for @reservation, :html => { :class => 'form-horizontal' } do |f| %>
-  
-  <%= f.association :room %>
-  <%= f.input :fromdate, as: :string %>
-  <%= f.input :todate, as: :string %>
-  <div class="control-group string optional reservation_todate">
+<%= simple_nested_form_for @reservation, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="well">
+	<h5>Ημερομηνίες</h5>  
+  	<%= f.input :fromdate, as: :string %>
+  	<%= f.input :todate, as: :string %>
+	<%= f.input :room_type, collection: @room_types %>
+	<%= f.input :room_id, collection: @rooms %>
+  </div>
+  <div class="control-group string optional reservation_customer">
 	<label class="string optional control-label" for="reservation_customer_id">Πελάτης</label>
 	<div class="controls">
   		<div class="input-append">
-  			<input id="reservation_customer_id" class="string optional" type="hidden" name="reservation[customer_id]">
-				<input id="reservation_customer_name" class="string optional" type="text" size="50" name="reservation[customer_name]">
-  			<button id="find_cust" class="btn" data-toggle="modal" type="button" >Εύρεση!</button>
+			
+  			<input id="reservation_customer_id" class="string optional" type="hidden" name="reservation[customer_id]" value="<%= @reservation.customer_id %>">
+			<input id="reservation_customer_name" class="string optional" type="text" size="50" name="reservation[customer_name]" value="<%= @reservation.customer_name %>">
+  			<button id="find_cust" class="btn"  type="button" >Εύρεση!</button>
   		</div>
 	</div>
   </div>
+  	
 	
   <%= f.input :deposit, input_html: { class:"input-mini" } %>
   <%= f.input :description %>
@@ -21,9 +26,16 @@
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 reservations_path, :class => 'btn' %>
   </div>
+
+
+	<%= content_for :sidebar do %>
+		<div class="well" id="reservation_costs_wrapper">
+			<h5>Αξία</h5><hr>
+		</div>
+	<%end%>
 <% end %>
 
-<!-- Modal -->
+<!-- Customer Modal -->
 <div id="customer_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -33,3 +45,6 @@
                 </div>
 
 </div>
+
+
+

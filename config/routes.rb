@@ -1,4 +1,7 @@
 Simplehotelflex::Application.routes.draw do
+  resources :reservation_costs
+
+
   resources :reservations do
     get :room_costs, on: :collection
   end

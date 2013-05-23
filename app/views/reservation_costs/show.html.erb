@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Reservation:</b>
+  <%= @reservation_cost.reservation_id %>
+</p>
+
+<p>
+  <b>Rate:</b>
+  <%= @reservation_cost.rate %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%= @reservation_cost.day %>
+</p>
+
+
+<%= link_to 'Edit', edit_reservation_cost_path(@reservation_cost) %> |
+<%= link_to 'Back', reservation_costs_path %>

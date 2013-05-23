@@ -1,0 +1,4 @@
+class ReservationCost < ActiveRecord::Base
+	belongs_to :resrvation
+  attr_accessible :day, :rate, :reservation_id
+end

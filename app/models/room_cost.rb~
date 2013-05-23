@@ -1,0 +1,7 @@
+class RoomCost < ActiveRecord::Base
+  belongs_to :room
+  has_one :reservation, through: :room_reservation
+  belongs_to :room_reservation, dependent: :destroy
+  
+  attr_accessible :cost, :day, :room_reservation_id
+end

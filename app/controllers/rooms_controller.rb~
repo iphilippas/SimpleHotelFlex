@@ -42,7 +42,7 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = Room.new(params[:room])
-
+    
     respond_to do |format|
       if @room.save
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
@@ -82,21 +82,34 @@ class RoomsController < ApplicationController
     end
   end
   
-  #room_managment
-  def room_managment
-    
-  end
-  
+  #Reservation 
   def available_rooms
-    if !params[:room_type].blank?
-      @rooms = RoomType.find(params[:room_type]).rooms.where("status = ?", false)
-      
-    else
-      @rooms = Room.where("status = ?", false)
-    end
+    fromdate = Date.parse(params[:fromdate])
+    todate = Date.parse(params[:todate])
+    @reservations = Reservation.where("todate >= ? and fromdate <= ?",fromdate, todate).map(&:room_id).flatten
     
+    if @reservations.empty?
+    	@reservations = [0]
+    end
+    if !params[:room_type].blank?
+      @rooms = RoomType.find(params[:room_type]).rooms.where("id not in (0)")
+    else
+      @rooms = Room.where('id not in ?', @reservations)
+    end
+
     respond_to do |format|
       format.js
+    end
+     
+  end
+  
+  #Rooms Dashboard
+  def list_rooms
+    @room_types = RoomType.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @rooms }
     end
   end
 end
