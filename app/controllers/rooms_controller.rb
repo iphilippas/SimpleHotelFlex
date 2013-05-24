@@ -86,10 +86,17 @@ class RoomsController < ApplicationController
   def available_rooms
     fromdate = Date.parse(params[:fromdate])
     todate = Date.parse(params[:todate])
-    @rooms =  Room.joins(:reservations).where("(fromdate <= ? AND todate >= ?) OR (fromdate <= ? AND todate >= ?)", fromdate, fromdate, todate, todate)
-    
-    render json: @rooms 
-   
+    #@rooms =  Room.joins(:reservations).where("(fromdate > ? OR todate < ?) AND (fromdate > ? OR todate < ?)", fromdate, fromdate, todate, todate)
+    if !params[:room_type].blank?
+      @rooms = RoomType.find(params[:room_type]).rooms.joins("LEFT OUTER JOIN reservations ON id = reservation.room_id")
+    else
+      @rooms = Room.joins(:reservations).where("(fromdate > ? OR todate < ?) AND (fromdate > ? OR todate < ?)", fromdate, fromdate, todate, todate)
+    end
+
+    respond_to do |format|
+      format.js
+    end
+     
   end
   
   #Rooms Dashboard

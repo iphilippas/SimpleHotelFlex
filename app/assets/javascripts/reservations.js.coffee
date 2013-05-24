@@ -7,17 +7,11 @@ jQuery ->
     $('#customer_modal').modal
       show: true
       remote: "/customers/reservation_modal?name=" + $('#reservation_customer_name').val()
-  $('#select_rooms').on 'click', ->
-    if $("#reservation_fromdate, #reservation_todate").val() isnt ""
-      $('#room_modal').modal show: true
-      $.ajax
-        url: "/rooms/available_rooms"
-        data:
-          fromdate: $("#reservation_fromdate").val()
-          todate: $("#reservation_todate").val()
-        success: (data) ->
-          $.each data, ->
-            id = "room_" + @id
-            $("#" + id).attr "disabled", true
-          $("#room_modal input[type=checkbox]:checked").each ->
-            $(this).removeAttr "disabled"
+  $("#reservation_room_type").change ->
+    $.ajax
+      url: "/rooms/available_rooms/"
+      data:
+        room_type: $("#reservation_room_type").val()
+        fromdate: $("#reservation_fromdate").val()
+        todate: $("#reservation_todate").val()
+    $("#reservation_room_id").val("")

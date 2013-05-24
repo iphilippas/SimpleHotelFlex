@@ -28,7 +28,7 @@ var checkin = $('#reservation_fromdate').datepicker({
 }).on('changeDate', function(ev) {
    if (ev.date.valueOf() > checkout.date.valueOf()) {
       var newDate = new Date(ev.date)
-      newDate.setDate(newDate.getDate() + 1);
+      newDate.setDate(newDate.getDate());
       checkout.setStartDate(newDate);
    }
    //$('#reservation_todate').removeAttr("disabled");
