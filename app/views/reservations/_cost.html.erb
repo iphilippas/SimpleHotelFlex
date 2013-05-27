@@ -1,0 +1,13 @@
+<% i = 0 %>
+<% for day in @fromdate..@todate %>
+	<div class="control-group decimal optional reservation_reservation_costs_rate">
+		<label class="decimal optional control-label" for="reservation_reservation_costs_attributes_<%= i %>_rate"><%= day %></label>
+		<div class="controls">
+			<input id="reservation_reservation_costs_attributes_<%= i %>_rate" value="<%= daily_cost(@room_type, @duration, I18n.l(day, :format => "%A")) %>" class="input-mini numeric decimal optional" type="number" step="any" name="reservation[reservation_costs_attributes][<%= i %>][rate]">
+		</div>
+		<input id="reservation_reservation_costs_attributes_<%= i %>_day" value="<%= day %>" class="input-mini numeric decimal optional" type="hidden" step="any" name="reservation[reservation_costs_attributes][<%= i %>][day]">
+	</div>
+	
+<% i += 1 %>
+<% end %>
+

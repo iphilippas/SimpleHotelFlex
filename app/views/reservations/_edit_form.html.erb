@@ -56,7 +56,24 @@
                 reservations_path, :class => 'btn' %>
   </div>
 
+	<%= content_for :sidebar do %>
+		<div class="well">
+			<h5>Αξία</h5><hr>
+		   <div id="reservation_costs_wrapper">
+				<%= fields_for :reservation_costs, :wrapper => false, html: { class: "form-horizontal", id: "reservation_costs_form"} do |reservation_cost| %>
+						<% for day in @fromdate..@todate %>
+						<div class="control-group">
+							<label class="control-label"><%= day %>: </label>
+						<div class="controls">
+							<%= reservation_cost.text_field :rate, value: daily_cost(@room_type, @duration, I18n.l(day, :format => "%A")), class:"input-mini" %>
+						</div>
+						</div>
+						<% end %>
 
+				<% end %>
+			</div>
+		</div>
+	<%end%>
 <% end %>
 
 <!-- Customer Modal -->

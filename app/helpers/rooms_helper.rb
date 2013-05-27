@@ -1,7 +1,12 @@
 module RoomsHelper
-  def daily_cost(room, duration, day)
-    cost = RoomRate.where("room_type_id = ? AND duration = ? AND days LIKE ?", room.room_type_id, duration, "%#{day}%")
-    cost[0].rate
+  def daily_cost(room_type, duration, day)
+    cost = RoomRate.where("room_type_id = ? AND duration = ? AND days LIKE ?", room_type, duration, "%#{day}%")
+    if cost[0].nil?
+      return 0
+      
+    else
+      return cost[0].rate
+    end
   end
   
   def room_class(room)

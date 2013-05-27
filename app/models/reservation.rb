@@ -2,21 +2,26 @@
 
 class Reservation < ActiveRecord::Base
   
-  belongs_to :rooms
+  belongs_to :room
   belongs_to :customer
-  has_many :reservation_costs 
+  has_many :reservation_costs, dependent: :destroy
     
-  #accepts_nested_attributes_for :reservation_costs
+  accepts_nested_attributes_for :reservation_costs
 
-  attr_accessible :customer_id, :deposit, :description, :fromdate, :reference, :todate, :customer_name, :room_id, :customer_name, :room_type
-  attr_accessor :customer_name
+  attr_accessible :customer_id, :deposit, :description, :fromdate, :reference, :todate, :customer_name, :room_id, :customer_name, :room_type, :status, :reservation_costs_attributes
+  attr_accessor :customer_name, :room_type
+  
+  #status: 0:pending, 1:checked_in, 2: checked_out, 4: canceled
   
   
   validates :customer_id, :room_id, :fromdate, :todate, presence: true
-  validates :rooms, presence: true
+  
   
   validates_numericality_of :deposit
   #validate :date_validation
+  
+  after_create :set_new_status
+  #before_update :delete_costs
   
   def customer_name
     Customer.find(customer_id).name if customer_id
@@ -41,5 +46,9 @@ class Reservation < ActiveRecord::Base
     end
   end
   
-
+  def set_new_status
+    self.update_attribute(:status, 0)
+  end
+  
+  
 end

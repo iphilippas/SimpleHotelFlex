@@ -1,5 +1,14 @@
 <%= simple_nested_form_for @reservation, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="well">
+ 	<div class="well">
+		<h5>Αξία</h5><hr>
+	   <div id="reservation_costs_wrapper">
+			<%= f.simple_fields_for :reservation_costs, html: { class: "form-horizontal", id: "reservation_costs_form"} do |reservation_cost| %>
+					<%= reservation_cost.input :rate, label: reservation_cost.object.day %>
+					<%= reservation_cost.input :day, as: :hidden %>
+			<% end %>
+		</div>
+	</div> 
+ <div class="well">
 	<h5>Ημερομηνίες</h5>  
   	<%= f.input :fromdate, as: :string %>
   	<%= f.input :todate, as: :string %>
@@ -27,12 +36,6 @@
                 reservations_path, :class => 'btn' %>
   </div>
 
-
-	<%= content_for :sidebar do %>
-		<div class="well" id="reservation_costs_wrapper">
-			<h5>Αξία</h5><hr>
-		</div>
-	<%end%>
 <% end %>
 
 <!-- Customer Modal -->

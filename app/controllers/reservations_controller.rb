@@ -27,7 +27,7 @@ class ReservationsController < ApplicationController
     @room_types = RoomType.all
     @rooms = Room.all
     @reservation = Reservation.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reservation }
@@ -36,18 +36,22 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/1/edit
   def edit
+    @room_types = RoomType.all
     @reservation = Reservation.find(params[:id])
-    @rooms = Room.all
+    @rooms = Room.where("room_type_id = ? ", @reservation.room.room_type_id)
   end
 
   # POST /reservations
   # POST /reservations.json
   def create
+    @room_types = RoomType.all
     @rooms = Room.all
+    
     @reservation = Reservation.new(params[:reservation])
     #@reservation.attributes = {'room_ids' => []}.merge(params[:reservation] || {})
     respond_to do |format|
       if @reservation.save
+        
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
         format.json { render json: @reservation, status: :created, location: @reservation }
       else
@@ -60,9 +64,10 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1
   # PUT /reservations/1.json
   def update
+    @room_types = RoomType.all
+    @rooms = Room.all
     @reservation = Reservation.find(params[:id])
-    #@rooms = Room.all
-    @reservation.attributes = {'room_ids' => []}.merge(params[:reservation] || {})
+   
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
@@ -85,11 +90,13 @@ class ReservationsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def room_costs
-    @rooms = Room.find(params[:rooms])
+  
+  def ajax_nested_form
     @fromdate = Date.parse(params[:fromdate])
     @todate = Date.parse(params[:todate])
     @duration = (@todate - @fromdate).to_i + 1
+    @room_type = params[:room_type]
+       
     if (@duration >= 3)
       @duration = 3
     end

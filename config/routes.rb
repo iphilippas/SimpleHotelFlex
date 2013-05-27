@@ -1,9 +1,8 @@
 Simplehotelflex::Application.routes.draw do
   resources :reservation_costs
 
-
   resources :reservations do
-    get :room_costs, on: :collection
+    get :ajax_nested_form, on: :collection
   end
 
 

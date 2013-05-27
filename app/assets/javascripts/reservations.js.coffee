@@ -15,3 +15,11 @@ jQuery ->
         fromdate: $("#reservation_fromdate").val()
         todate: $("#reservation_todate").val()
     $("#reservation_room_id").val("")
+    $("#reservation_room_id, #reservation_fromdate, #reservation_todate").change ->
+      $.ajax
+        url: "/reservations/ajax_nested_form"
+        data:
+          room_type: $("#reservation_room_type").val()
+          fromdate: $("#reservation_fromdate").val()
+          todate: $("#reservation_todate").val()
+        
